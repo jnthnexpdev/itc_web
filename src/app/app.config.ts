@@ -5,10 +5,12 @@ import { routes } from './app.routes';
 import { headersInterceptor } from './shared/interceptors/headers.interceptor';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CookieService } from 'ngx-cookie-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    CookieService,
     provideHttpClient(
       withInterceptors([headersInterceptor])
     ), provideAnimationsAsync('noop'),

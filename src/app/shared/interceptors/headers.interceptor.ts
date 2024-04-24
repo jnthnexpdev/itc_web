@@ -1,19 +1,21 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
-export const headersInterceptor: HttpInterceptorFn = (req, next) => {
-  const cookie = inject(CookieService);
-  const token = cookie.get('session');
+export const headersInterceptor: HttpInterceptorFn = ( req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
+    const cookieService = inject(CookieService);
+    const token = cookieService.get('session');
 
-  console.log('Cookie: ', token);
-
-  const reqWithHeader = req.clone({
-    withCredentials: true,
-    setHeaders: {
-      Bearer: token ?? '',
-    },
-  });
-
-  return next(reqWithHeader);
+    if (token) {
+      const cloned = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true
+      });
+      return next(cloned);
+    } else {
+      return next(req);
+    }
 };

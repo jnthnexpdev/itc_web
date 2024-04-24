@@ -330,7 +330,7 @@ export class GroupStatisticsComponent implements OnInit{
       this.router.navigate([`/docente/estadisticas-grupo/${this.idGroup}`]).then(() => {
         window.location.reload();
       });
-    }, 3000);
+    }, 10000);
   }
 
 }

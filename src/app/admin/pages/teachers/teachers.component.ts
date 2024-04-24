@@ -53,6 +53,12 @@ export class TeachersComponent implements OnInit{
       document.body.removeChild(anchor);
       window.URL.revokeObjectURL(url);
     });
+
+    setTimeout(() => {
+      this.router.navigate([`/administrador/docentes`]).then(() => {
+        window.location.reload();
+      });
+    }, 10000);
   }
 
   registerTeacher() : void{

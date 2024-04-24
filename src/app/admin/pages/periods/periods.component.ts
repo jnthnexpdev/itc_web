@@ -1,11 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgClass } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { PeriodService } from '../../../shared/services/period/period.service';
 import { period } from '../../../shared/interfaces/period.interfaces';
 import { AddNewPeriodComponent } from '../../components/period-add/add-new-period.component';
 import { SystemService } from '../../../shared/services/system/system.service';
+
 
 
 @Component({
@@ -24,6 +26,7 @@ export class PeriodsComponent implements OnInit{
   constructor(
     private periodService : PeriodService,
     private dialog : MatDialog,
+    private router : Router,
     private systemService : SystemService
   ){}
 
@@ -54,6 +57,12 @@ export class PeriodsComponent implements OnInit{
       document.body.removeChild(anchor);
       window.URL.revokeObjectURL(url);
     });
+
+    setTimeout(() => {
+      this.router.navigate([`/administrador/periodos`]).then(() => {
+        window.location.reload();
+      });
+    }, 10000);
   }
 
   getDataPeriods(){

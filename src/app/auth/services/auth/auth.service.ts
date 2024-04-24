@@ -59,13 +59,8 @@ export class AuthService {
     return this.http.post(`${environment.api}/auth/access-code/validate`, body, options);
   }
 
-  async logOut(){
-    this.cookies.delete('session', '/');
-    setTimeout(() => {
-      this.router.navigate(['/cuenta/iniciar-sesion']).then(() => {
-        window.location.reload();
-      })
-    }, 1);
+  logOut(){
+    return this.http.get(`${environment.api}/auth/logout`);
   }
 
 }

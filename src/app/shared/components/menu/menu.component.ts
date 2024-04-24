@@ -57,7 +57,15 @@ export class MenuComponent implements OnInit{
   }
 
   logOut(){
-    this.auth.logOut();
+    this.auth.logOut().subscribe((data : any) => {
+      if(data.success === true){
+        setTimeout(() => {
+          this.router.navigate(['/iniciar-sesion']).then(() => {
+            window.location.reload();
+          });
+        });
+      }
+    })
   }
 
 }

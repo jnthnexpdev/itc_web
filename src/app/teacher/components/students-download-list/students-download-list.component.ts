@@ -80,7 +80,7 @@ export class StudentsDownloadListComponent implements OnInit{
       this.router.navigate([`/docente/detalles-grupo/${this.idGroup}`]).then(() => {
         window.location.reload();
       });
-    }, 3000);
+    }, 10000);
   }
 
   downloadUnitList() : void{

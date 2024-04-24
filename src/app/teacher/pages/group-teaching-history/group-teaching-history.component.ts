@@ -75,7 +75,7 @@ export class GroupTeachingHistoryComponent implements OnInit {
       this.router.navigate([`/docente/historial-grupos`]).then(() => {
         window.location.reload();
       });
-    }, 3000);
+    }, 10000);
   }
 
 }
