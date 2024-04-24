@@ -1,0 +1,41 @@
+<body [ngClass]="darkTheme() ? 'dark-theme flex-center-center-column' : 'flex-center-center-column' ">
+    <form class="flex-center-start-column container" [formGroup]="periodForm">
+        <h2 class="tittle mb-24"> Nuevo periodo </h2>
+        <span class="medium mb-24"> 
+            Ingresa la informacion correspodiente al nuevo periodo
+        </span>
+
+        <div [ngClass]="periodInvalid() ?  'flex-center-start-row invalid-field mb-24 '  : 'flex-center-start-row field-form mb-24'">
+            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"></path>
+                <path d="m3 7 9 6 9-6"></path>
+            </svg>
+            <label class="medium"> Periodo </label>
+        </div>
+
+        <input type="text" class="input-form mb-24" formControlName="periodo" placeholder="Ej: Enero - Junio 2024">
+
+        <div [ngClass]="keyInvalid() ?  'flex-center-start-row invalid-field mb-24 '  : 'flex-center-start-row field-form mb-24'">
+            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 11H7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2Z"></path>
+                <path d="M12 17a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
+                <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+            </svg>
+            <label class="medium"> Reticula </label>
+        </div>
+
+        <select class="input-form mb-24" formControlName="idReticula">
+            @for (subject of subjectKeys; track $index){
+                <option value="{{subject?._id}}"> {{subject?.claveReticula}} </option>
+            }@empty{
+                <option value="0" disabled selected> Aun no hay reticulas </option>
+            }
+        </select>
+
+        <div class="flex-center-se-row btn-options">
+            <button class="btn-secondary small" (click)="closeDialog()"> Cancelar </button>
+            <button class="btn-primary small" (click)="validateForm()" [disabled]="btnDisable()"> Guardar </button>
+        </div>
+
+    </form>
+</body>
