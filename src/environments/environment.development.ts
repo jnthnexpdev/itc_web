@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    api : `http://localhost:3900/api/v1/itc`
+    api : `https://tnm.onrender.com/api/v1/itc`
 };
