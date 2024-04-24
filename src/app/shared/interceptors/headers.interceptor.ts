@@ -6,11 +6,14 @@ export const headersInterceptor: HttpInterceptorFn = (req, next) => {
   const cookie = inject(CookieService);
   const token = cookie.get('session');
 
-  const auth = req.clone({
-    setHeaders : {
-      Authorization : `Bearer ${token}`
-    }
+  console.log('Cookie: ', token);
+
+  const reqWithHeader = req.clone({
+    withCredentials: true,
+    setHeaders: {
+      Bearer: token ?? '',
+    },
   });
 
-  return next(auth);
+  return next(reqWithHeader);
 };
